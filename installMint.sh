@@ -24,6 +24,10 @@ function checkProg {
     fi
 }
 
+# file manager that I prefer to nautilus
+function installPcmanfm {
+    aptitude install pcmanfm
+}
 
 function setProxy {
 	displayFunctionName
@@ -162,7 +166,8 @@ function main {
 	installAwesome
 	awesomeCopycats
 	installLocate
-	installNfs
+    installPcmanfm
+    installNfs
 	installZsh
 }
 
