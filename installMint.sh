@@ -177,7 +177,8 @@ function usage {
 
     This script will install all the things I like in a machine or special things needing some setup
     OPTIONS:
-    [none]  installs everything without a proxy
+    [none]  Shows the help message
+    -A      Full install (without proxy) 
     -h      Show this message
     -p      Set the proxy
     -v      Installs vim
@@ -194,11 +195,14 @@ function usage {
 
 if [ -z "$1" ]
   then
-    main
+    usage
   else
-    while getopts “hpvozacn” OPTION
+    while getopts “Ahpvozacn” OPTION
     do
         case $OPTION in
+            A)
+                main
+                ;;
             h)
                 usage
                 exit 1
