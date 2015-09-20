@@ -104,7 +104,6 @@ function installZsh {
 }
 
 
-# !!!!! NE MARCHE PAS 
 function installAwesome {
 	displayFunctionName
 
