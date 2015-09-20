@@ -24,6 +24,10 @@ function checkProg {
     fi
 }
 
+# file manager that I prefer to nautilus
+function installPcmanfm {
+    aptitude install pcmanfm
+}
 
 function setProxy {
 	displayFunctionName
@@ -134,7 +138,10 @@ function awesomeCopycats {
 	cp rc.lua.multicolor rc.lua
 	#by default this theme uses terminals not installed on Mint. Let's change that.
 	sed -i 's/terminal   = "urxvtc" or "xterm"/terminal   = "x-terminal-emulator"/g' rc.lua
-	echo 'awful.util.spawn("owncloud")' >> rc.lua
+    sed -i 's/awful\.key({ altkey }, "Left",/--awful.key({ altkey }, "Left",/g' rc.lua
+    sed -i 's/awful\.key({ altkey }, "Right",/--awful.key({ altkey }, "Right",/g' rc.lua
+    sed -i 's/names = { "web", "term", "docs", "media", "files", "other" },/names = { "web", "term", "mails", "media", "files", "other" },/g' rc.lua
+    echo 'awful.util.spawn("owncloud")' >> rc.lua
 }
 
 function installNfs {
@@ -162,7 +169,8 @@ function main {
 	installAwesome
 	awesomeCopycats
 	installLocate
-	installNfs
+    installPcmanfm
+    installNfs
 	installZsh
 }
 
@@ -172,7 +180,8 @@ function usage {
 
     This script will install all the things I like in a machine or special things needing some setup
     OPTIONS:
-    [none]  installs everything without a proxy
+    [none]  Shows the help message
+    -A      Full install (without proxy) 
     -h      Show this message
     -p      Set the proxy
     -v      Installs vim
@@ -189,11 +198,14 @@ function usage {
 
 if [ -z "$1" ]
   then
-    main
+    usage
   else
-    while getopts “hpvozacn” OPTION
+    while getopts “Ahpvozacn” OPTION
     do
         case $OPTION in
+            A)
+                main
+                ;;
             h)
                 usage
                 exit 1
