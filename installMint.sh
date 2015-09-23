@@ -113,6 +113,14 @@ function installAwesome {
 
 }
 
+# installs xscreensaver and change the file of the rc.lua
+function installXscreensaver {
+	cd ~/.config/awesome
+	$install xscreensaver
+	sed -i 's/globalkeys = awful\.util\.table\.join(/globalkeys = awful.util.table.join(\nawful.key({ }, "F12", function () awful.util.spawn("xscreensaver-command -lock") end),/g' rc.lua
+	echo 'awful.util.spawn_with_shell("xscreensaver -no-splash")' >> rc.lua
+}
+
 # installs the rc.lua.multicolor theme
 function awesomeCopycats {
 	displayFunctionName
