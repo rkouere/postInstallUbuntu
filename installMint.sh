@@ -67,7 +67,6 @@ function installVim {
 	displayFunctionName
 	$install vim
 	echo "
-    set number
     filetype plugin indent on
     set tabstop=4
     set shiftwidth=4
@@ -172,7 +171,8 @@ function main {
 	updateMint
 	installGit
 	installVim
-	installOwnCloudClient
+	installXscreensaver
+    installOwnCloudClient
 	installAwesome
 	awesomeCopycats
 	installLocate

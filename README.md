@@ -13,3 +13,4 @@ The full install will install :
 * awesome copycats themes (and tailor the theme as I like it)
 * nfs
 * locate 
+* xscreensaver (with awesome tunning : lock screen of F12 + autostart)
