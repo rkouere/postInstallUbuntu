@@ -14,3 +14,16 @@ The full install will install :
 * nfs
 * locate 
 * xscreensaver (with awesome tunning : lock screen of F12 + autostart)
+
+Custom install
+    * OPTIONS:
+    * [none]  Shows the help message
+    * -A      Full install (without proxy) 
+    * -h      Show this message
+    * -p      Set the proxy
+    * -v      Installs vim
+    * -o      Installs the latest Owncloud client   
+    * -z      Installs zsh with oh my zsh
+    * -a      Installs the latest awesome
+    * -c      Installs awesome copycats    
+    * -n      Installs the nfs tools
