@@ -16,8 +16,8 @@ The full install will install :
 * xscreensaver (with awesome tunning : lock screen of F12 + autostart)
 
 Custom install
-* OPTIONS:
-* [none]  Shows the help message
+OTIONS:
+[none]  Shows the help message
 * -A      Full install (without proxy) 
 * -h      Show this message
 * -p      Set the proxy
