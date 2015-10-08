@@ -112,14 +112,6 @@ function installAwesome {
 
 }
 
-# installs xscreensaver and change the file of the rc.lua
-function installXscreensaver {
-	cd ~/.config/awesome
-	$install xscreensaver
-	sed -i 's/globalkeys = awful\.util\.table\.join(/globalkeys = awful.util.table.join(\nawful.key({ }, "F12", function () awful.util.spawn("xscreensaver-command -lock") end),/g' rc.lua
-	echo 'awful.util.spawn_with_shell("xscreensaver -no-splash")' >> rc.lua
-}
-
 # installs the rc.lua.multicolor theme
 function awesomeCopycats {
 	displayFunctionName
@@ -148,6 +140,9 @@ function awesomeCopycats {
     sed -i 's/awful\.key({ altkey }, "Right",/--awful.key({ altkey }, "Right",/g' rc.lua
     sed -i 's/names = { "web", "term", "docs", "media", "files", "other" },/names = { "web", "term", "mails", "media", "files", "other" },/g' rc.lua
     echo 'awful.util.spawn("owncloud")' >> rc.lua
+    # key binding for lock and sleep
+	sed -i 's/globalkeys = awful\.util\.table\.join(/globalkeys = awful.util.table.join(\nawful.key({ altkey, "Control" }, "l", function () awful.util.spawn("gnome-screensaver-command --lock") end),/g' rc.lua
+    sed -i 's/-- Take a screenshot/awful.key({ altkey, "Control" }, "s", function () os\.execute("gnome-screensaver-command --lock \&\& dbus-send --system --print-reply --dest=org\.freedesktop\.UPower \/org\/freedesktop\/UPower org\.freedesktop\.UPower\.Suspend") end),\n-- Take a screenshot/g' rc.lua
 }
 
 function installNfs {
@@ -171,7 +166,10 @@ function main {
 	updateMint
 	installGit
 	installVim
+<<<<<<< HEAD
+=======
 	installXscreensaver
+>>>>>>> 1c5e872d87be770937c70e136b4602249610c59f
     installOwnCloudClient
 	installAwesome
 	awesomeCopycats
