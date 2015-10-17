@@ -166,10 +166,6 @@ function main {
 	updateMint
 	installGit
 	installVim
-<<<<<<< HEAD
-=======
-	installXscreensaver
->>>>>>> 1c5e872d87be770937c70e136b4602249610c59f
     installOwnCloudClient
 	installAwesome
 	awesomeCopycats
