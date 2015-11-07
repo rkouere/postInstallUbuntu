@@ -62,6 +62,28 @@ function updateMint {
 	aptitude upgrade
 }
 
+# https://github.com/scrooloose/syntastic
+function installSyntastic {
+    # Install pathogen.vim
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    echo "execute pathogen#infect()" >> ~/.vimrc
+    # Install syntastic as a Pathogen bundle
+    cd ~/.vim/bundle && \
+    checkProg git
+    git clone https://github.com/scrooloose/syntastic.git
+    echo "
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    " >> ~/.vimrc
+}
+
 
 function installVim {
 	displayFunctionName
@@ -74,6 +96,7 @@ function installVim {
     
     
     " >> ~/.vimrc
+    # installSyntastic
 }
 
 function installOwnCloudClient {
