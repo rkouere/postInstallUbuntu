@@ -65,6 +65,7 @@ function updateMint {
 # https://github.com/scrooloose/syntastic
 function installSyntastic {
     # Install pathogen.vim
+    checkProg curl
     mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
     echo "execute pathogen#infect()" >> ~/.vimrc
@@ -214,6 +215,7 @@ function usage {
     -a      Installs the latest awesome
     -c      Installs awesome copycats    
     -n      Installs the nfs tools
+    -S      Installs syntastic (parser for vim)
     "
 }
 
@@ -229,6 +231,9 @@ if [ -z "$1" ]
         case $OPTION in
             A)
                 main
+                ;;
+            S)    
+                installSyntastic
                 ;;
             h)
                 usage
