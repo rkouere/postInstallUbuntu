@@ -1,7 +1,5 @@
 #!/bin/bash
-update="aptitude update"
-install="aptitude -y install"
-$run_as_use="sudo -u ${SUDOUSER}"
+cur_user=`who am i | awk '{print $1}'`
 
 function displayFunctionName {
 	echo "========== ${FUNCNAME[ 1 ]} =========="
@@ -65,16 +63,17 @@ function updateMint {
 # https://github.com/scrooloose/syntastic
 function installSyntastic {
     # Install pathogen.vim
+    aptitude install python3-flake8
     checkProg curl
-    $run_as_use mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-    $run_as_use curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-    $run_as_use echo "execute pathogen#infect()" >> ~/.vimrc
+    sudo -u $cur_user mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    sudo -u $cur_user curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    sudo -u $cur_user echo "execute pathogen#infect()" >> ~/.vimrc
     # Install syntastic as a Pathogen bundle
-    $run_as_use cd ~/.vim/bundle && \
+    cd ~/.vim/bundle && \
     checkProg git
-    $run_as_use git clone https://github.com/scrooloose/syntastic.git
+    sudo -u $cur_user git clone https://github.com/scrooloose/syntastic.git
     
-    $run_as_use echo "
+    sudo -u $cur_user echo "
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
@@ -90,7 +89,7 @@ function installSyntastic {
 function installVim {
 	displayFunctionName
 	$install vim
-	$run_as_use echo "
+	sudo -u $cur_user echo "
     filetype plugin indent on
     set tabstop=4
     set shiftwidth=4
@@ -103,10 +102,10 @@ function installVim {
 
 function installOwnCloudClient {
 	displayFunctionName
-	$run_as_use sh -c "echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/xUbuntu_15.04/ /' >> /etc/apt/sources.list.d/owncloud-client.list"
-	$run_as_use wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_15.04/Release.key
+	sudo -u $cur_user sh -c "echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/xUbuntu_15.04/ /' >> /etc/apt/sources.list.d/owncloud-client.list"
+	sudo -u $cur_user wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_15.04/Release.key
 	apt-key add - < Release.key  
-	$run_as_use rm Release.key
+	sudo -u $cur_user rm Release.key
 	$update
 	$install owncloud-client
 }
@@ -115,16 +114,16 @@ function installOwnCloudClient {
 # installs the latest zsh, oh my zsh, change the theme and makes it the default terminal
 function installZsh {
 	displayFunctionName
-	$run_as_use cd
+	sudo -u $cur_user cd
 	$install zsh
     #we need git to install oh my zsh
     checkProg git
 
-    $run_as_use sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+    sudo -u $cur_user sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
  	
     sed -i 's/ZSH_THEME="(*)"/ZSH_THEME="bira"/g' ~/.zshrc
 	# make zsh the default theme
-	$run_as_use chsh -s /bin/zsh
+	sudo -u $cur_user chsh -s /bin/zsh
 }
 
 
@@ -155,10 +154,10 @@ function awesomeCopycats {
 	cp -r lain-master/* awesome-copycats-master/lain 
 
 	
-	$run_as_use mkdir ~/.config/awesome
-	$run_as_use cp -r awesome-copycats-master/* ~/.config/awesome
+	sudo -u $cur_user mkdir ~/.config/awesome
+	sudo -u $cur_user cp -r awesome-copycats-master/* ~/.config/awesome
 	cd ~/.config/awesome
-	$run_as_use cp rc.lua.multicolor rc.lua
+	sudo -u $cur_user cp rc.lua.multicolor rc.lua
 	#by default this theme uses terminals not installed on Mint. Let's change that.
 	sed -i 's/terminal   = "urxvtc" or "xterm"/terminal   = "x-terminal-emulator"/g' rc.lua
     sed -i 's/awful\.key({ altkey }, "Left",/--awful.key({ altkey }, "Left",/g' rc.lua
@@ -227,7 +226,7 @@ if [ -z "$1" ]
   then
     usage
   else
-    while getopts “Ahpvozacn” OPTION
+    while getopts “AShpvozacn” OPTION
     do
         case $OPTION in
             A)
