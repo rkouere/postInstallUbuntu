@@ -1,4 +1,6 @@
 #!/bin/bash
+update="aptitude update"
+install="aptitude -y install"
 cur_user=`who am i | awk '{print $1}'`
 
 function displayFunctionName {
