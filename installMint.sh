@@ -187,7 +187,7 @@ function installLocate {
 	updatedb
 }
 
-function installRedshift {
+function installRedShift {
 	displayFunctionName
 	$install gtk-redshift
 }
@@ -220,6 +220,7 @@ function usage {
     -a      Installs the latest awesome
     -c      Installs awesome copycats    
     -n      Installs the nfs tools
+    -r      Installs redshift
     -S      Installs syntastic (parser for vim)
     "
 }
@@ -231,7 +232,7 @@ if [ -z "$1" ]
   then
     usage
   else
-    while getopts “AShpvozacn” OPTION
+    while getopts “AShpvozacnr” OPTION
     do
         case $OPTION in
             A)
@@ -264,6 +265,9 @@ if [ -z "$1" ]
                 ;;
             n)
                 installNfs   
+                ;;
+            r)
+                installRedShift  
                 ;;
             ?)
                 usage
