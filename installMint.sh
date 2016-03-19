@@ -193,6 +193,22 @@ function installRedShift {
 	$install gtk-redshift
 }
 
+# installs various little tools I like + add my bash alias
+function installVariousStuff {
+	displayFunctionName
+    # $install tree
+    # installRedShift
+    echo '
+        alias g="git"
+        alias ga="git add"
+        alias gc="git commit -m"
+        alias gs="git status"
+        alias gd="git diff"
+
+
+    ' >> ~/.zshrc
+}
+
 function main {
 	updateMint
 	installGit
@@ -220,7 +236,7 @@ function usage {
     -a      Installs the latest awesome
     -c      Installs awesome copycats    
     -n      Installs the nfs tools
-    -r      Installs redshift
+    -s      Installs my prefered tools/settings
     -S      Installs syntastic (parser for vim)
     "
 }
@@ -232,7 +248,7 @@ if [ -z "$1" ]
   then
     usage
   else
-    while getopts “AShpvozacnr” OPTION
+    while getopts “AShpvozacns” OPTION
     do
         case $OPTION in
             A)
@@ -266,8 +282,8 @@ if [ -z "$1" ]
             n)
                 installNfs   
                 ;;
-            r)
-                installRedShift  
+            s)
+                installVariousStuff  
                 ;;
             ?)
                 usage
