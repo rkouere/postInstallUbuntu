@@ -196,8 +196,8 @@ function installRedShift {
 # installs various little tools I like + add my bash alias
 function installVariousStuff {
 	displayFunctionName
-    # $install tree
-    # installRedShift
+    $install tree
+    installRedShift
     echo '
         alias g="git"
         alias ga="git add"
