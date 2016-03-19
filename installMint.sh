@@ -196,10 +196,10 @@ function main {
 	updateMint
 	installGit
 	installVim
-    	installOwnCloudClient
+    installOwnCloudClient
 	installLocate    	
 	installPcmanfm
-    	installNfs
+    installNfs
 	installZsh
 	installRedshift
 }
