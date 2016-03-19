@@ -123,7 +123,7 @@ function installZsh {
 
     sudo -u $cur_user sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
  	
-    sed -i 's/ZSH_THEME="(*)"/ZSH_THEME="bira"/g' ~/.zshrc
+    sed -i 's/ZSH_THEME=".*"/ZSH_THEME="bira"/g' ~/.zshrc
 	# make zsh the default theme
 	sudo -u $cur_user chsh -s /bin/zsh
 }
