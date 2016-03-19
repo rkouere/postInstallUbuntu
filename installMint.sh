@@ -135,8 +135,8 @@ function installAwesome {
 	echo `add-apt-repository -y ppa:klaus-vormweg/awesome`
         $update
         $install awesome awesome-extra
-
 }
+
 
 # installs the rc.lua.multicolor theme
 function awesomeCopycats {
@@ -185,20 +185,23 @@ function installLocate {
 	displayFunctionName
 	$install locate
 	updatedb
+}
 
+function installRedshift {
+	displayFunctionName
+	$install gtk-redshift
 }
 
 function main {
 	updateMint
 	installGit
 	installVim
-    installOwnCloudClient
-	installAwesome
-	awesomeCopycats
-	installLocate
-    installPcmanfm
-    installNfs
+    	installOwnCloudClient
+	installLocate    	
+	installPcmanfm
+    	installNfs
 	installZsh
+	installRedshift
 }
 
 function usage {
