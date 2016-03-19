@@ -104,8 +104,8 @@ function installVim {
 
 function installOwnCloudClient {
 	displayFunctionName
-	sudo -u $cur_user sh -c "echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/xUbuntu_15.04/ /' >> /etc/apt/sources.list.d/owncloud-client.list"
-	sudo -u $cur_user wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/xUbuntu_15.04/Release.key
+	sudo -u $cur_user sh -c "echo 'deb http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/Ubuntu_14.04/ /' >> /etc/apt/sources.list.d/owncloud-client.list"
+    sudo -u $cur_user wget http://download.opensuse.org/repositories/isv:ownCloud:desktop/Ubuntu_14.04/Release.key
 	apt-key add - < Release.key  
 	sudo -u $cur_user rm Release.key
 	$update
