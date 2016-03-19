@@ -135,6 +135,7 @@ function installAwesome {
 	echo `add-apt-repository -y ppa:klaus-vormweg/awesome`
         $update
         $install awesome awesome-extra
+        installPcmanfm
 }
 
 
@@ -198,7 +199,6 @@ function main {
 	installVim
     installOwnCloudClient
 	installLocate    	
-	installPcmanfm
     installNfs
 	installZsh
 	installRedshift
